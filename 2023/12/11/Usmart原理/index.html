@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Usmart | leioukupo的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Usamrt流程头文件内容解析 usmart.h—-usmart的主要函数  123456789101112131415161718192021222324252627282930313233343536&#x2F;&#x2F;8个函数函数void usmart_init(u8 sysclk);		&#x2F;&#x2F; 初始化u8 usmart_cmd_rec(u8 *str);			&#x2F;&#x2F; 识别void usmart_exe(voi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Usmart">
+<meta property="og:url" content="https://blog.leioukupo.top/2023/12/11/Usmart%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="leioukupo的博客">
+<meta property="og:description" content="Usamrt流程头文件内容解析 usmart.h—-usmart的主要函数  123456789101112131415161718192021222324252627282930313233343536&#x2F;&#x2F;8个函数函数void usmart_init(u8 sysclk);		&#x2F;&#x2F; 初始化u8 usmart_cmd_rec(u8 *str);			&#x2F;&#x2F; 识别void usmart_exe(voi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-11T05:51:53.568Z">
+<meta property="article:modified_time" content="2023-12-17T07:10:11.094Z">
+<meta property="article:author" content="leioukupo">
+<meta property="article:tag" content="STM32">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="leioukupo的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">leioukupo的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">享受生活,致力学习</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.leioukupo.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Usmart原理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/11/Usmart%E5%8E%9F%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2023-12-11T05:51:53.568Z" itemprop="datePublished">2023-12-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Usmart
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Usamrt流程"><a href="#Usamrt流程" class="headerlink" title="Usamrt流程"></a>Usamrt流程</h1><h2 id="头文件内容解析"><a href="#头文件内容解析" class="headerlink" title="头文件内容解析"></a>头文件内容解析</h2><ul>
+<li>usmart.h—-usmart的主要函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//8个函数函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">usmart_init</span><span class="params">(u8 sysclk)</span>;		<span class="comment">// 初始化</span></span><br><span class="line">u8 <span class="title function_">usmart_cmd_rec</span><span class="params">(u8 *str)</span>;			<span class="comment">// 识别</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">usmart_exe</span><span class="params">(<span class="type">void</span>)</span>;				<span class="comment">// 执行</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">usmart_scan</span><span class="params">(<span class="type">void</span>)</span>;				<span class="comment">// 扫描</span></span><br><span class="line">u32 <span class="title function_">read_addr</span><span class="params">(u32 addr)</span>;			<span class="comment">// 读取指定地址的值</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">write_addr</span><span class="params">(u32 addr, u32 val)</span>; <span class="comment">// 在指定地址写入指定的值</span></span><br><span class="line">u32 <span class="title function_">usmart_get_runtime</span><span class="params">(<span class="type">void</span>)</span>;		<span class="comment">// 获取运行时间</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">usmart_reset_runtime</span><span class="params">(<span class="type">void</span>)</span>;	<span class="comment">// 复位运行时间</span></span><br><span class="line"><span class="comment">//两个结构体</span></span><br><span class="line"><span class="comment">// 函数名列表</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">m_usmart_nametab</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">void</span> *func;		<span class="comment">// 函数指针</span></span><br><span class="line">	<span class="type">const</span> u8 *name; <span class="comment">// 函数名(查找串)</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// usmart控制管理器</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">m_usmart_dev</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> _<span class="title">m_usmart_nametab</span> *<span class="title">funs</span>;</span> <span class="comment">// 函数名指针</span></span><br><span class="line"></span><br><span class="line">	<span class="type">void</span> (*init)(u8);		<span class="comment">// 初始化</span></span><br><span class="line">	u8 (*cmd_rec)(u8 *str); <span class="comment">// 识别函数名及参数</span></span><br><span class="line">	<span class="type">void</span> (*exe)(<span class="type">void</span>);		<span class="comment">// 执行</span></span><br><span class="line">	<span class="type">void</span> (*scan)(<span class="type">void</span>);		<span class="comment">// 扫描</span></span><br><span class="line">	u8 fnum;				<span class="comment">// 函数数量</span></span><br><span class="line">	u8 pnum;				<span class="comment">// 参数数量</span></span><br><span class="line">	u8 id;					<span class="comment">// 函数id</span></span><br><span class="line">	u8 sptype;				<span class="comment">// 参数显示类型(非字符串参数):0,10进制;1,16进制;</span></span><br><span class="line">	u16 parmtype;			<span class="comment">// 参数的类型</span></span><br><span class="line">	u8 plentbl[MAX_PARM];	<span class="comment">// 每个参数的长度暂存表</span></span><br><span class="line">	u8 parm[PARM_LEN];		<span class="comment">// 函数的参数</span></span><br><span class="line">	u8 runtimeflag;			<span class="comment">// 0,不统计函数执行时间;1,统计函数执行时间,注意:此功能必须在USMART_ENTIMX_SCAN使能的时候,才有用</span></span><br><span class="line">	u32 runtime;			<span class="comment">// 运行时间,单位:0.1ms,最大延时时间为定时器CNT值的2倍*0.1ms</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//一些变量定义不需要解释</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>usmart_str.h—-usmart字符串的相关操作</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">u8 <span class="title function_">usmart_get_parmpos</span><span class="params">(u8 num)</span>;                                    <span class="comment">// 得到某个参数在参数列里面的起始位置</span></span><br><span class="line">u8 <span class="title function_">usmart_strcmp</span><span class="params">(u8 *str1, u8 *str2)</span>;                             <span class="comment">// 对比两个字符串是否相等</span></span><br><span class="line">u32 <span class="title function_">usmart_pow</span><span class="params">(u8 m, u8 n)</span>;                                       <span class="comment">// M^N次方</span></span><br><span class="line">u8 <span class="title function_">usmart_str2num</span><span class="params">(u8 *str, u32 *res)</span>;                             <span class="comment">// 字符串转为数字</span></span><br><span class="line">u8 <span class="title function_">usmart_get_cmdname</span><span class="params">(u8 *str, u8 *cmdname, u8 *nlen, u8 maxlen)</span>; <span class="comment">// 从str中得到指令名,并返回指令长度</span></span><br><span class="line">u8 <span class="title function_">usmart_get_fname</span><span class="params">(u8 *str, u8 *fname, u8 *pnum, u8 *rval)</span>;      <span class="comment">// 从str中得到函数名</span></span><br><span class="line">u8 <span class="title function_">usmart_get_aparm</span><span class="params">(u8 *str, u8 *fparm, u8 *ptype)</span>;               <span class="comment">// 从str中得到一个函数参数</span></span><br><span class="line">u8 <span class="title function_">usmart_get_fparam</span><span class="params">(u8 *str, u8 *parn)</span>;                          <span class="comment">// 得到str中所有的函数参数.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="u8-usmart-get-fname"><a href="#u8-usmart-get-fname" class="headerlink" title="u8 usmart_get_fname"></a>u8 usmart_get_fname</h3><blockquote>
+<p>pcnt &amp; 0x7f 应该表示第几个参数<br>strtemp每次循环指向一个字符<br>首先判断接收到的字符串前五个字符是不是void, 设置rval, 是不是需要返回值<br>注意! 接收完前五个字符, 记得加’\0’  字符串结束标记, 否则usmart_strcmp无法比较<br>下一个while判断当前字符是不是’*’或者’(‘ , 判断逻辑是, 没有碰到空格或者 * 就继续循环, 同时res也就是offset加1<br>根据offset直接跳到函数名开始的地方<br>继续判断, 逻辑是   fover表示碰到的括号, 左括号加一, 右括号减一,  如果fover是0说明没有接收完, 因为至少有一个左括号或有右括号<br>判断是不是’,’   是,temp加一(temp表示参数个数)</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从str中得到函数名</span></span><br><span class="line"><span class="comment">//*str:源字符串指针</span></span><br><span class="line"><span class="comment">//*fname:获取到的函数名字指针</span></span><br><span class="line"><span class="comment">//*pnum:函数的参数个数</span></span><br><span class="line"><span class="comment">//*rval:是否需要显示返回值(0,不需要;1,需要)</span></span><br><span class="line"><span class="comment">// 返回值:0,成功;其他,错误代码</span></span><br><span class="line">u8 <span class="title function_">usmart_get_fname</span><span class="params">(u8 *str, u8 *fname, u8 *pnum, u8 *rval)</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 res;</span><br><span class="line">	u8 fover = <span class="number">0</span>; <span class="comment">// 括号深度</span></span><br><span class="line">	u8 *strtemp;</span><br><span class="line">	u8 offset = <span class="number">0</span>;</span><br><span class="line">	u8 parmnum = <span class="number">0</span>;</span><br><span class="line">	u8 temp = <span class="number">1</span>;</span><br><span class="line">	u8 fpname[<span class="number">6</span>];  <span class="comment">// void+X+&#x27;/0&#x27;</span></span><br><span class="line">	u8 fplcnt = <span class="number">0</span>; <span class="comment">// 第一个参数的长度计数器</span></span><br><span class="line">	u8 pcnt = <span class="number">0</span>;   <span class="comment">// 参数计数器</span></span><br><span class="line">	u8 nchar;</span><br><span class="line">	<span class="comment">// 判断函数是否有返回值</span></span><br><span class="line">	strtemp = str;</span><br><span class="line">	<span class="keyword">while</span> (*strtemp != <span class="string">&#x27;\0&#x27;</span>) <span class="comment">// 没有结束</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (*strtemp != <span class="string">&#x27; &#x27;</span> &amp;&amp; (pcnt &amp; <span class="number">0X7F</span>) &lt; <span class="number">5</span>) <span class="comment">// 最多记录5个字符</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (pcnt == <span class="number">0</span>)</span><br><span class="line">				pcnt |= <span class="number">0X80</span>; <span class="comment">// 置位最高位,标记开始接收返回值类型   x000 0x00</span></span><br><span class="line">			<span class="keyword">if</span> (((pcnt &amp; <span class="number">0x7f</span>) == <span class="number">4</span>) &amp;&amp; (*strtemp != <span class="string">&#x27;*&#x27;</span>))  <span class="comment">// 0x7f ---&gt; 0111 1111   和0x7f相与查看pcnt是不是等于4    且strtemp此时指向的不是 * </span></span><br><span class="line">				<span class="keyword">break</span>;						<span class="comment">// 就跳出当前这一次循环, 因为最后一个字符,必须是*</span></span><br><span class="line">			fpname[pcnt &amp; <span class="number">0x7f</span>] = *strtemp; <span class="comment">// 记录函数的返回值类型   <span class="doctag">TODO:</span> ?????</span></span><br><span class="line">			pcnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (pcnt == <span class="number">0X85</span>)<span class="comment">// 0x85 ---&gt; 1000 0101</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		strtemp++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (pcnt) <span class="comment">// 接收完了</span></span><br><span class="line">	&#123;</span><br><span class="line">		fpname[pcnt &amp; <span class="number">0x7f</span>] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 加入结束符</span></span><br><span class="line">		<span class="keyword">if</span> (usmart_strcmp(fpname, <span class="string">&quot;void&quot;</span>) == <span class="number">0</span>) <span class="comment">// 看是不是void</span></span><br><span class="line">			*rval = <span class="number">0</span>; <span class="comment">// 不需要返回值</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			*rval = <span class="number">1</span>; <span class="comment">// 需要返回值</span></span><br><span class="line">		pcnt = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	res = <span class="number">0</span>;</span><br><span class="line">	strtemp = str;</span><br><span class="line">	<span class="keyword">while</span> (*strtemp != <span class="string">&#x27;(&#x27;</span> &amp;&amp; *strtemp != <span class="string">&#x27;\0&#x27;</span>) <span class="comment">// 此代码找到函数名的真正起始位置</span></span><br><span class="line">	&#123;</span><br><span class="line">		strtemp++;</span><br><span class="line">		res++;</span><br><span class="line">		<span class="keyword">if</span> (*strtemp == <span class="string">&#x27; &#x27;</span> || *strtemp == <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			nchar = usmart_search_nextc(strtemp); <span class="comment">// 获取下一个字符</span></span><br><span class="line">			<span class="keyword">if</span> (nchar != <span class="string">&#x27;(&#x27;</span> &amp;&amp; nchar != <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">				offset = res; <span class="comment">// 跳过空格和*号</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	strtemp = str;</span><br><span class="line">	<span class="keyword">if</span> (offset)</span><br><span class="line">		strtemp += offset + <span class="number">1</span>; <span class="comment">// 跳到函数名开始的地方</span></span><br><span class="line">	res = <span class="number">0</span>;</span><br><span class="line">	nchar = <span class="number">0</span>; <span class="comment">// 是否正在字符串里面的标志,0，不在字符串;1，在字符串;</span></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (*strtemp == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			res = USMART_FUNCERR; <span class="comment">// 函数错误</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (*strtemp == <span class="string">&#x27;(&#x27;</span> &amp;&amp; nchar == <span class="number">0</span>)</span><br><span class="line">			fover++; <span class="comment">// 括号深度增加一级</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (*strtemp == <span class="string">&#x27;)&#x27;</span> &amp;&amp; nchar == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (fover)</span><br><span class="line">				fover--;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				res = USMART_FUNCERR; <span class="comment">// 错误结束,没收到&#x27;(&#x27;</span></span><br><span class="line">			<span class="keyword">if</span> (fover == <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">break</span>; <span class="comment">// 到末尾了,退出</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (*strtemp == <span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line">			nchar = !nchar;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (fover == <span class="number">0</span>)  <span class="comment">// 已经接受完了函数名了</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (*strtemp != <span class="string">&#x27; &#x27;</span>) <span class="comment">// 空格不属于函数名</span></span><br><span class="line">			&#123;</span><br><span class="line">				*fname = *strtemp; <span class="comment">// 得到函数名</span></span><br><span class="line">				fname++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="comment">// 函数名还没接收完</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (*strtemp == <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				temp = <span class="number">1</span>; <span class="comment">// 使能增加一个参数</span></span><br><span class="line">				pcnt++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (*strtemp != <span class="string">&#x27; &#x27;</span> &amp;&amp; *strtemp != <span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (pcnt == <span class="number">0</span> &amp;&amp; fplcnt &lt; <span class="number">5</span>) <span class="comment">// 当第一个参数来时,为了避免统计void类型的参数,必须做判断.  void(超过5了,所以定为5</span></span><br><span class="line">				&#123;</span><br><span class="line">					fpname[fplcnt] = *strtemp; <span class="comment">// 记录参数特征</span></span><br><span class="line">					fplcnt++;</span><br><span class="line">				&#125;</span><br><span class="line">				temp++; <span class="comment">// 得到有效参数(非空格)</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (fover == <span class="number">1</span> &amp;&amp; temp == <span class="number">2</span>) <span class="comment">// <span class="doctag">TODO:</span>没懂？？？</span></span><br><span class="line">			&#123;</span><br><span class="line">				temp++;	   <span class="comment">// 防止重复增加</span></span><br><span class="line">				parmnum++; <span class="comment">// 参数增加一个</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		strtemp++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (parmnum == <span class="number">1</span>) <span class="comment">// 只有1个参数.</span></span><br><span class="line">	&#123;</span><br><span class="line">		fpname[fplcnt] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 加入结束符</span></span><br><span class="line">		<span class="keyword">if</span> (usmart_strcmp(fpname, <span class="string">&quot;void&quot;</span>) == <span class="number">0</span>)</span><br><span class="line">			parmnum = <span class="number">0</span>; <span class="comment">// 参数为void,表示没有参数.</span></span><br><span class="line">	&#125;</span><br><span class="line">	*pnum = parmnum; <span class="comment">// 记录参数个数</span></span><br><span class="line">	*fname = <span class="string">&#x27;\0&#x27;</span>;	 <span class="comment">// 加入结束符</span></span><br><span class="line">	<span class="keyword">return</span> res;		 <span class="comment">// 返回执行结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="u8-usmart-strcmp-u8-str1-u8-str2"><a href="#u8-usmart-strcmp-u8-str1-u8-str2" class="headerlink" title="u8 usmart_strcmp(u8 *str1, u8 *str2)"></a>u8 usmart_strcmp(u8 *str1, u8 *str2)</h3><blockquote>
+<p>比较两个字符串是不是一样, 和strcmp类似</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">u8 <span class="title function_">usmart_strcmp</span><span class="params">(u8 *str1, u8 *str2)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (*str1 != *str2)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 不相等</span></span><br><span class="line">		<span class="keyword">if</span> (*str1 == <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">			<span class="keyword">break</span>; <span class="comment">// 对比完成了.</span></span><br><span class="line">		str1++;</span><br><span class="line">		str2++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 两个字符串相等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="u8-usmart-search-nextc-u8-str"><a href="#u8-usmart-search-nextc-u8-str" class="headerlink" title="u8 usmart_search_nextc(u8 *str)"></a>u8 usmart_search_nextc(u8 *str)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取下一个字符（当中间有很多空格的时候，此函数直接忽略空格，找到空格之后的第一个字符）</span></span><br><span class="line"><span class="comment">// str:字符串指针</span></span><br><span class="line"><span class="comment">// 返回值:下一个字符</span></span><br><span class="line">u8 <span class="title function_">usmart_search_nextc</span><span class="params">(u8 *str)</span></span><br><span class="line">&#123;</span><br><span class="line">	str++;</span><br><span class="line">	<span class="keyword">while</span> (*str == <span class="string">&#x27; &#x27;</span> &amp;&amp; str != <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">		str++;</span><br><span class="line">	<span class="keyword">return</span> *str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="usmart-init—-初始化"><a href="#usmart-init—-初始化" class="headerlink" title="usmart_init—-初始化"></a>usmart_init—-初始化</h3><blockquote>
+<p>初始化定时器, 使用的是定时器4, 主频也就是sysclk是72mhz, sysclk<em>100-1是分频系数—&gt; 72000000&#x2F;(72 * 100-1 +1 )&#x3D;10000hz, 所以一个定时器周期是1&#x2F;10000&#x3D;&#x3D;0.0001s&#x3D;&#x3D;0.1ms, 定时器0.1ms</em>1000&#x3D;&#x3D;&#x3D;&#x3D;100ms中断一次</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Timer4_Init(<span class="number">1000</span>, (u32)sysclk * <span class="number">100</span> - <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="usmart-cmd-rec—-识别"><a href="#usmart-cmd-rec—-识别" class="headerlink" title="usmart_cmd_rec—-识别"></a>usmart_cmd_rec—-识别</h3><blockquote>
+<p>usmart_cmd_rec函数逻辑<br>入口参数是从串口接收到的函数名字, 字符串指针<br>首先通过usmart_get_fname得到函数名字和参数个数<br>然后从0到usmart_dev.fnum(结构体里函数数量值)开始循环, strcmp逐个比较接收的函数名字和本地存储的函数名字<br>情况1. 如果找到一样的，判断收到的函数参数是不是和存储的函数参数个数相等<br>情况1.1 收到的小于存储的就返回错误<strong>USMART_PARMERR</strong>, 记下函数id, 跳出循环<br>情况1.2 收到的大于存储的,     xxxxxxxxxxx<br>情况1.3 收到的等于存储的, 用usmart_get_fparam获得函数参数个数并赋值给usmart_dev.pnum<br>情况3. 如果i循环到等于usmart_dev.fnum, 也就是全部找完了, 没有发现符合的函数名字,也返回一个错误<strong>USMART_NOFUNCFIND</strong><br>都判断完,找到了且参数个数也一样就返回<strong>USMART_OK</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入口参数是字符串指针</span></span><br><span class="line">u8 <span class="title function_">usmart_cmd_rec</span><span class="params">(u8 *str)</span></span><br><span class="line">&#123;</span><br><span class="line">	u8 sta, i, rval; <span class="comment">// 状态</span></span><br><span class="line">	u8 rpnum, spnum;</span><br><span class="line">	u8 rfname[MAX_FNAME_LEN];							<span class="comment">// 暂存空间,用于存放接收到的函数名</span></span><br><span class="line">	u8 sfname[MAX_FNAME_LEN];							<span class="comment">// 存放本地函数名</span></span><br><span class="line">	sta = usmart_get_fname(str, rfname, &amp;rpnum, &amp;rval); <span class="comment">// 得到接收到的数据的函数名及参数个数</span></span><br><span class="line">	<span class="keyword">if</span> (sta)</span><br><span class="line">		<span class="keyword">return</span> sta; <span class="comment">// 错误</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; usmart_dev.fnum; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sta = usmart_get_fname((u8 *)usmart_dev.funs[i].name, sfname, &amp;spnum, &amp;rval); <span class="comment">// 得到本地函数名及参数个数</span></span><br><span class="line">		<span class="keyword">if</span> (sta)</span><br><span class="line">			<span class="keyword">return</span> sta;							<span class="comment">// 本地解析有误</span></span><br><span class="line">		<span class="keyword">if</span> (usmart_strcmp(sfname, rfname) == <span class="number">0</span>) <span class="comment">// 相等</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (spnum &gt; rpnum)</span><br><span class="line">				<span class="keyword">return</span> USMART_PARMERR; <span class="comment">// 参数错误(输入参数比源函数参数少)</span></span><br><span class="line">			usmart_dev.id = i;		   <span class="comment">// 记录函数ID.</span></span><br><span class="line">			<span class="keyword">break</span>;					   <span class="comment">// 跳出.</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (i == usmart_dev.fnum)</span><br><span class="line">		<span class="keyword">return</span> USMART_NOFUNCFIND;	  <span class="comment">// 未找到匹配的函数</span></span><br><span class="line">	sta = usmart_get_fparam(str, &amp;i); <span class="comment">// 得到函数参数个数</span></span><br><span class="line">	<span class="keyword">if</span> (sta)</span><br><span class="line">		<span class="keyword">return</span> sta;		 <span class="comment">// 返回错误</span></span><br><span class="line">	usmart_dev.pnum = i; <span class="comment">// 参数个数记录</span></span><br><span class="line">	<span class="keyword">return</span> USMART_OK;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 从str中得到函数名</span></span><br><span class="line"><span class="comment">//*str:源字符串指针</span></span><br><span class="line"><span class="comment">//*fname:获取到的函数名字指针</span></span><br><span class="line"><span class="comment">//*pnum:函数的参数个数</span></span><br><span class="line"><span class="comment">//*rval:是否需要显示返回值(0,不需要;1,需要)</span></span><br><span class="line"><span class="comment">// 返回值:0,成功;其他,错误代码</span></span><br><span class="line">u8 <span class="title function_">usmart_get_fname</span><span class="params">(u8 *str, u8 *fname, u8 *pnum, u8 *rval)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="usmart-exe—-执行"><a href="#usmart-exe—-执行" class="headerlink" title="usmart_exe—-执行"></a>usmart_exe—-执行</h3><h3 id="usmart-scan—-扫描"><a href="#usmart-scan—-扫描" class="headerlink" title="usmart_scan—-扫描"></a>usmart_scan—-扫描</h3><h3 id="整体逻辑"><a href="#整体逻辑" class="headerlink" title="整体逻辑"></a>整体逻辑</h3><ol>
+<li>初始化定时器四, 0.1ms产生一次中断, 执行usmart_scan进行扫描</li>
+<li>扫描成功后执行usmart_cmd_rec识别接收的字符串</li>
+<li>识别成功后执行usmart_exe运行函数</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.leioukupo.top/2023/12/11/Usmart%E5%8E%9F%E7%90%86/" data-id="cmbnrplgc000fm8pwdf5ef2bd" data-title="Usmart" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STM32/" rel="tag">STM32</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/01/07/RTC%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          RTC配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/12/09/FSMC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">FSMC</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/STM32/">STM32</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/openai/">openai</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pve/">pve</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVE/" rel="tag"> PVE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3588/" rel="tag">3588</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32/" rel="tag">STM32</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pve/" rel="tag">pve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" rel="tag">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PVE/" style="font-size: 10px;"> PVE</a> <a href="/tags/3588/" style="font-size: 10px;">3588</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/STM32/" style="font-size: 20px;">STM32</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">c语言</a> <a href="/tags/openai/" style="font-size: 10px;">openai</a> <a href="/tags/pve/" style="font-size: 15px;">pve</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 10px;">单片机</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/08/PVE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">PVE</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/08/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD/">逆向api通过外挂解锁特殊功能</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/01/8845-all%20in%20one/">8845-all in one</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/31/Next-chat-web%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/">Next-chat-web同步</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/28/3588Pve%E5%AE%9E%E8%B7%B5/">3588Pve实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 leioukupo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

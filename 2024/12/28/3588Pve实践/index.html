@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>3588Pve实践 | leioukupo的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Rock 5b卖掉后在咸鱼重新入手了一块3588，8+32的配置  Pve安装需要debian系统 1curl -L https:&#x2F;&#x2F;mirrors.apqa.cn&#x2F;proxmox&#x2F;debian&#x2F;pveport.gpg | sudo tee &#x2F;usr&#x2F;share&#x2F;keyrings&#x2F;pveport.gpg &gt;&#x2F;dev&#x2F;null  1echo &quot;deb [deb&#x3D;arm64 sign">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3588Pve实践">
+<meta property="og:url" content="https://blog.leioukupo.top/2024/12/28/3588Pve%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="leioukupo的博客">
+<meta property="og:description" content="Rock 5b卖掉后在咸鱼重新入手了一块3588，8+32的配置  Pve安装需要debian系统 1curl -L https:&#x2F;&#x2F;mirrors.apqa.cn&#x2F;proxmox&#x2F;debian&#x2F;pveport.gpg | sudo tee &#x2F;usr&#x2F;share&#x2F;keyrings&#x2F;pveport.gpg &gt;&#x2F;dev&#x2F;null  1echo &quot;deb [deb&#x3D;arm64 sign">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-28T04:44:54.807Z">
+<meta property="article:modified_time" content="2024-12-31T02:07:05.133Z">
+<meta property="article:author" content="leioukupo">
+<meta property="article:tag" content=" PVE">
+<meta property="article:tag" content="3588">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="leioukupo的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">leioukupo的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">享受生活,致力学习</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.leioukupo.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-3588Pve实践" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/28/3588Pve%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time class="dt-published" datetime="2024-12-28T04:44:54.807Z" itemprop="datePublished">2024-12-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      3588Pve实践
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Rock 5b卖掉后在咸鱼重新入手了一块3588，8+32的配置</p>
+</blockquote>
+<h1 id="Pve安装"><a href="#Pve安装" class="headerlink" title="Pve安装"></a>Pve安装</h1><p><strong>需要debian系统</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://mirrors.apqa.cn/proxmox/debian/pveport.gpg | sudo <span class="built_in">tee</span> /usr/share/keyrings/pveport.gpg &gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [deb=arm64 signed-by=/usr/share/keyrings/pveport.gpg] https://mirrors.apqa.cn/proxmox/debian/pve bookworm port&quot;</span> | sudo <span class="built_in">tee</span>  /etc/apt/sources.list.d/pveport.list</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编辑&#x2F;etc&#x2F;hosts</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost</span><br><span class="line">127.0.1.1   yjh-jm10-3588</span><br><span class="line">::1         localhost yjh-jm10-3588 ip6-localhost ip6-loopback</span><br><span class="line">fe00::0     ip6-localnet</span><br><span class="line">ff00::0     ip6-mcastprefix</span><br><span class="line">ff02::1     ip6-allnodes</span><br><span class="line">ff02::2     ip6-allrouters</span><br><span class="line">192.168.31.43 proxmox-server yjh-jm10-3588</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ifupdown2</span><br><span class="line">sudo apt install proxmox-ve postfix open-iscsi pve-edk2-firmware-aarch64</span><br></pre></td></tr></table></figure>
+
+<p>最后要记得重启，在访问ip+8006就可以访问pve管理界面了，密码和账号是root和对应的密码</p>
+<h1 id="虚拟机测试"><a href="#虚拟机测试" class="headerlink" title="虚拟机测试"></a>虚拟机测试</h1><p>使用非lxc容器方式</p>
+<p>注意点</p>
+<ul>
+<li>cpu设置要勾选高级选项，在cpu绑定一栏输入 4,5,6,7</li>
+<li>无显示输出，需要按照pve官方文档操作</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/jiangcuo/Proxmox-Port/wiki/Install-Proxmox-VE-on-Debian-bookworm">Pve官方文档</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt download pve-edk2-firmware-aarch64=3.20220526-rockchip</span><br><span class="line">dpkg -i pve-edk2-firmware-aarch64_3.20220526-rockchip_all.deb</span><br></pre></td></tr></table></figure>
+
+<p>如果apt下载失败，复制<a target="_blank" rel="noopener" href="https://mirrors.apqa.cn/proxmox/debian/pve/dists/bookworm/port//binary-arm64/pve-edk2-firmware-aarch64_3.20220526-rockchip_all.deb">pve-edk2</a>到浏览器下载</p>
+<p>虚拟机硬件里的显示需要选择ramfb方式</p>
+<h2 id="安装istore"><a href="#安装istore" class="headerlink" title="安装istore"></a>安装istore</h2><p>使用虚拟机安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -f raw -O qcow2 istoreos-22.03.7-2024122712-h88k-squashfs-combined.img vm-101-disk-1.qcow2</span><br><span class="line">qm importdisk 101 vm-101-disk-1.qcow2 <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+
+<p>打开刚才创建的虚拟机的硬件，会看到有个未使用的磁盘，双击打开，点确认即可</p>
+<p>对应编辑一下引导顺序。<br><em><strong>启动后，是uefi shell，没有进入istore界面，需要带efi的istore固件</strong></em></p>
+<h2 id="lxc运行openwrt"><a href="#lxc运行openwrt" class="headerlink" title="lxc运行openwrt"></a>lxc运行openwrt</h2><p>1.先上传lxc模板，再执行下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pct create 101 \</span><br><span class="line"><span class="built_in">local</span>:vztmpl/rootfs.tar.xz \</span><br><span class="line">--rootfs <span class="built_in">local</span>:1 \</span><br><span class="line">--ostype unmanaged \</span><br><span class="line">--hostname openwrt \</span><br><span class="line">--<span class="built_in">arch</span> arm64 \</span><br><span class="line">--cores 8 \</span><br><span class="line">--memory 1024 \</span><br><span class="line">--swap 0 \</span><br><span class="line">-net0 bridge=vmbr0,name=eth0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># rootfs.tar.xz根据你的lxc模板名字修改</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">101是<span class="built_in">id</span>号</span><br><span class="line"> <span class="built_in">local</span>:1的1是指该lxc容器磁盘大小是1g</span><br><span class="line">memory 运行内存</span><br></pre></td></tr></table></figure>
+
+<p>2.修改lxc容器配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/pve/lxc/101.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">arch</span>: arm64</span><br><span class="line">cores: 8</span><br><span class="line">features: nesting=1</span><br><span class="line">hostname: openwrt</span><br><span class="line">memory: 1024</span><br><span class="line">net0: name=eth0,bridge=vmbr0,hwaddr=BC:24:11:BE:DB:C8,<span class="built_in">type</span>=veth</span><br><span class="line">ostype: unmanaged</span><br><span class="line">rootfs: <span class="built_in">local</span>:101/vm-101-disk-0.raw,size=1G</span><br><span class="line">swap: 0</span><br><span class="line">lxc.mount.entry: /dev/ppp /dev/ppp none <span class="built_in">bind</span>,create=file</span><br><span class="line">lxc.mount.entry: /dev/net/tun /dev/met/tun none <span class="built_in">bind</span>,create=file</span><br></pre></td></tr></table></figure>
+
+<p>3.在pve的web页面找到这个lxc容器，选项—》功能  —-》勾选嵌套</p>
+<p>4.启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pct start 101</span><br></pre></td></tr></table></figure>
+
+<p>4.1修改&#x2F;etc&#x2F;config&#x2F;firewall，后面新增</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lxc-attach 101 </span><br><span class="line"><span class="comment"># 进入op终端，用vi编辑文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">config rule</span><br><span class="line">        option name             Allow-Web-WAN</span><br><span class="line">        option src              wan</span><br><span class="line">        option dest_port        443</span><br><span class="line">        option proto            tcp</span><br><span class="line">        option target           ACCEPT</span><br><span class="line">config rule</span><br><span class="line">        option name             Allow-Web-WAN</span><br><span class="line">        option src              wan</span><br><span class="line">        option dest_port        80</span><br><span class="line">        option proto            tcp</span><br><span class="line">        option target           ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>4.2.重启防火墙</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/firewall restart</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+
+<p>根据ifconfig显示的ip访问就可以进入后台</p>
+<p><a target="_blank" rel="noopener" href="https://virtualizeeverything.com/2022/05/23/setting-openwrt-in-proxmox-lxc/">参考链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/openwrt/23.05/arm64/default/20241229_11%3A57/">openwrt_lxc模板</a></p>
+<h2 id="pve开启ipv6"><a href="#pve开启ipv6" class="headerlink" title="pve开启ipv6"></a>pve开启ipv6</h2><p><a target="_blank" rel="noopener" href="https://www.icn.ink/pve/57.html">https://www.icn.ink/pve/57.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.leioukupo.top/2024/12/28/3588Pve%E5%AE%9E%E8%B7%B5/" data-id="cmbnrplg10001m8pwars90feq" data-title="3588Pve实践" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PVE/" rel="tag"> PVE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3588/" rel="tag">3588</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/12/31/Next-chat-web%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Next-chat-web同步
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/07/04/Qt%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Qt笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/STM32/">STM32</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/openai/">openai</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pve/">pve</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVE/" rel="tag"> PVE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3588/" rel="tag">3588</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32/" rel="tag">STM32</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pve/" rel="tag">pve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" rel="tag">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PVE/" style="font-size: 10px;"> PVE</a> <a href="/tags/3588/" style="font-size: 10px;">3588</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/STM32/" style="font-size: 20px;">STM32</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">c语言</a> <a href="/tags/openai/" style="font-size: 10px;">openai</a> <a href="/tags/pve/" style="font-size: 15px;">pve</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 10px;">单片机</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/08/PVE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">PVE</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/08/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD/">逆向api通过外挂解锁特殊功能</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/01/8845-all%20in%20one/">8845-all in one</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/31/Next-chat-web%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/">Next-chat-web同步</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/28/3588Pve%E5%AE%9E%E8%B7%B5/">3588Pve实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 leioukupo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

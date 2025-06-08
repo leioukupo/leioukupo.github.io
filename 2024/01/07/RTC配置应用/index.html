@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>RTC配置 | leioukupo的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="RTC配置应用日历配置流程 使能PWR时钟  1RCC_APB1PeriphClockCmd()   使能后备寄存器访问  1PWR_BackupAccessCmd()   配置RTC时钟源，使能RTC时钟  1234RCC_RTCCLKConfig()RCC_RTCCLKCmd()# 如果使用LSE    要打开LSE# RCC_LSEConfig(RCC_LSE_ON)   初始化RTC(同步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RTC配置">
+<meta property="og:url" content="https://blog.leioukupo.top/2024/01/07/RTC%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="leioukupo的博客">
+<meta property="og:description" content="RTC配置应用日历配置流程 使能PWR时钟  1RCC_APB1PeriphClockCmd()   使能后备寄存器访问  1PWR_BackupAccessCmd()   配置RTC时钟源，使能RTC时钟  1234RCC_RTCCLKConfig()RCC_RTCCLKCmd()# 如果使用LSE    要打开LSE# RCC_LSEConfig(RCC_LSE_ON)   初始化RTC(同步">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-07T00:51:22.062Z">
+<meta property="article:modified_time" content="2024-04-04T07:49:28.209Z">
+<meta property="article:author" content="leioukupo">
+<meta property="article:tag" content="STM32">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="leioukupo的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">leioukupo的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">享受生活,致力学习</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.leioukupo.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-RTC配置应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/07/RTC%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2024-01-07T00:51:22.062Z" itemprop="datePublished">2024-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      RTC配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="RTC配置应用"><a href="#RTC配置应用" class="headerlink" title="RTC配置应用"></a>RTC配置应用</h1><h2 id="日历配置流程"><a href="#日历配置流程" class="headerlink" title="日历配置流程"></a>日历配置流程</h2><ol>
+<li>使能PWR时钟</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RCC_APB1PeriphClockCmd()</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使能后备寄存器访问</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PWR_BackupAccessCmd()</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>配置RTC时钟源，使能RTC时钟</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RCC_RTCCLKConfig()</span><br><span class="line">RCC_RTCCLKCmd()</span><br><span class="line"># 如果使用LSE    要打开LSE</span><br><span class="line"># RCC_LSEConfig(RCC_LSE_ON)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>初始化RTC(同步&#x2F;异步分频系数和时钟格式)</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_Init ()</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>设置时间</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_SetTime ()</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>设置日期</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_SetDate()</span><br></pre></td></tr></table></figure>
+
+<h2 id="闹钟配置流程"><a href="#闹钟配置流程" class="headerlink" title="闹钟配置流程"></a>闹钟配置流程</h2><ol>
+<li>初始化RTC相关参数</li>
+<li>关闭闹钟</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_AlarmCmd(RTC_Alarm_A,DISABLE)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>配置闹钟参数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_SetAlarm()</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>开启闹钟</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_AlarmCmd(RTC_Alarm_A,EABLE)</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>开启配置闹钟中断</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RTC_ITConfig()</span><br><span class="line">EXTI_Init()</span><br><span class="line">NVIC_Init()</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>编写中断服务函数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_Alarm_IRQHandler()</span><br></pre></td></tr></table></figure>
+
+<h2 id="RTC周期性自动唤醒配置流程"><a href="#RTC周期性自动唤醒配置流程" class="headerlink" title="RTC周期性自动唤醒配置流程"></a>RTC周期性自动唤醒配置流程</h2><ol>
+<li>初始化RTC相关参数</li>
+<li>关闭WakeUp</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_WakeUpCmd(DISABLE)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>配置WakeUp时钟分频系数&#x2F;来源</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_WakeUpClockConfig()</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>设置WakeUp自动装载寄存器</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_SetWakeUpCounter()</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>使能WakeUp</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_WakeUpCmd( ENABLE);</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>开启配置闹钟中断</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RTC_ITConfig()</span><br><span class="line">EXTI_Init()</span><br><span class="line">NVIC_Init()</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>编写中断服务函数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RTC_WKUP_IRQHandler();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.leioukupo.top/2024/01/07/RTC%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8/" data-id="cmbnrplgb000dm8pw0icx2qtj" data-title="RTC配置" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STM32/" rel="tag">STM32</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/04/13/ADC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          ADC使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/12/11/Usmart%E5%8E%9F%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Usmart</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/STM32/">STM32</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/openai/">openai</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pve/">pve</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVE/" rel="tag"> PVE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3588/" rel="tag">3588</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32/" rel="tag">STM32</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pve/" rel="tag">pve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" rel="tag">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PVE/" style="font-size: 10px;"> PVE</a> <a href="/tags/3588/" style="font-size: 10px;">3588</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/STM32/" style="font-size: 20px;">STM32</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">c语言</a> <a href="/tags/openai/" style="font-size: 10px;">openai</a> <a href="/tags/pve/" style="font-size: 15px;">pve</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 10px;">单片机</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/08/PVE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">PVE</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/08/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD/">逆向api通过外挂解锁特殊功能</a>
+          </li>
+        
+          <li>
+            <a href="/2025/04/01/8845-all%20in%20one/">8845-all in one</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/31/Next-chat-web%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/">Next-chat-web同步</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/28/3588Pve%E5%AE%9E%E8%B7%B5/">3588Pve实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 leioukupo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
