@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Pve虚拟铭凡nas os | leioukupo的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="第一步，获取序列号铭凡nas os会检查bios的序列号对不对，不对的话是无法启动的，所以我们需要给虚拟机注入正确的序列号 进入Pve的命令终端 12dmidecode -s system-serial-numberxxxxxxxxxxx  这一串就是我们的序列号了 第二步，新建一个虚拟机不要任何的系统，选q35和efi。创建完成后把虚拟机硬件的全部硬盘分离并移除 然后继续回到命令行终端 12na">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pve虚拟铭凡nas os">
+<meta property="og:url" content="https://blog.leioukupo.top/2026/03/07/Pve%E8%99%9A%E6%8B%9F%E9%93%AD%E5%87%A1nas%20os/index.html">
+<meta property="og:site_name" content="leioukupo的博客">
+<meta property="og:description" content="第一步，获取序列号铭凡nas os会检查bios的序列号对不对，不对的话是无法启动的，所以我们需要给虚拟机注入正确的序列号 进入Pve的命令终端 12dmidecode -s system-serial-numberxxxxxxxxxxx  这一串就是我们的序列号了 第二步，新建一个虚拟机不要任何的系统，选q35和efi。创建完成后把虚拟机硬件的全部硬盘分离并移除 然后继续回到命令行终端 12na">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-07T00:33:13.616Z">
+<meta property="article:modified_time" content="2026-03-07T01:15:17.054Z">
+<meta property="article:author" content="leioukupo">
+<meta property="article:tag" content="Pve">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="leioukupo的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">leioukupo的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">享受生活,致力学习</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.leioukupo.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Pve虚拟铭凡nas os" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/07/Pve%E8%99%9A%E6%8B%9F%E9%93%AD%E5%87%A1nas%20os/" class="article-date">
+  <time class="dt-published" datetime="2026-03-07T00:33:13.616Z" itemprop="datePublished">2026-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Pve/">Pve</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Pve虚拟铭凡nas os
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="第一步，获取序列号"><a href="#第一步，获取序列号" class="headerlink" title="第一步，获取序列号"></a>第一步，获取序列号</h1><p>铭凡nas os会检查bios的序列号对不对，不对的话是无法启动的，所以我们需要给虚拟机注入正确的序列号</p>
+<p>进入Pve的命令终端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -s system-serial-number</span><br><span class="line">xxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>这一串就是我们的序列号了</p>
+<h1 id="第二步，新建一个虚拟机"><a href="#第二步，新建一个虚拟机" class="headerlink" title="第二步，新建一个虚拟机"></a>第二步，新建一个虚拟机</h1><p>不要任何的系统，选q35和efi。创建完成后把虚拟机硬件的全部硬盘分离并移除</p>
+<p>然后继续回到命令行终端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/pve/qemu-server/xxx.conf</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">虚拟机是xxx号，这里就是xxx.conf</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agent: 1</span><br><span class="line">args: -smbios <span class="attr">type</span>=<span class="number">1</span>,serial=xxxxxxxxxxx</span><br><span class="line">bios: ovmf</span><br></pre></td></tr></table></figure>
+
+<p>在bios: ovmf上面添加一行,xxxxxxx就是第一步获得的序列号</p>
+<h1 id="第三步，下载铭凡nas-os和img2kvm并上传到Pve的root目录"><a href="#第三步，下载铭凡nas-os和img2kvm并上传到Pve的root目录" class="headerlink" title="第三步，下载铭凡nas os和img2kvm并上传到Pve的root目录"></a>第三步，下载铭凡nas os和img2kvm并上传到Pve的root目录</h1><p>注意，上传铭凡nas os之前，需要把它解压成img格式，再压缩成gz格式上传</p>
+<p>因为img2kvm只支持gz,我也不想去改源码，就这么用吧</p>
+<p>回到Pve的命令终端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ./img2kvm</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./img2kvm nasos-2.1.10.0002.img.gz xxx</span><br><span class="line">xxx是虚拟机号，比如我的是106，那就是./img2kvm nasos-2.1.10.0002.img.gz 106</span><br></pre></td></tr></table></figure>
+
+<h1 id="第四步，新建一个虚拟硬盘给虚拟机"><a href="#第四步，新建一个虚拟硬盘给虚拟机" class="headerlink" title="第四步，新建一个虚拟硬盘给虚拟机"></a>第四步，新建一个虚拟硬盘给虚拟机</h1><p>没有第二块硬盘是无法创建存储池进入系统的，所以需要创建一块硬盘</p>
+<p>在硬件—&gt;添加—&gt;硬盘         大小自定义，其他默认</p>
+<p>如果显示的是未使用的磁盘，双击然后点添加</p>
+<h1 id="第五步，开机，用铭凡的app连接虚拟机初始化"><a href="#第五步，开机，用铭凡的app连接虚拟机初始化" class="headerlink" title="第五步，开机，用铭凡的app连接虚拟机初始化"></a>第五步，开机，用铭凡的app连接虚拟机初始化</h1><p><strong>在这一过程，虚拟机可能会自动关机，这是正常，只需要再次启动即可</strong></p>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><p>如果创建存储池一直错误，就把原来创建的硬盘分离并移除，然后重新建一块硬盘</p>
+<p><a href="%5Bhttps://www.minisforum.cn/pages/product-info%5D(https://www.minisforum.cn/pages/product-info)">铭凡nas os</a></p>
+<p><a target="_blank" rel="noopener" href="https://fw.koolcenter.com/binary/other-tools/">img2kvm</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.leioukupo.top/2026/03/07/Pve%E8%99%9A%E6%8B%9F%E9%93%AD%E5%87%A1nas%20os/" data-id="cuid4tiPlV_gS7Iqf0m311DYC" data-title="Pve虚拟铭凡nas os" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pve/" rel="tag">Pve</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/03/26/PVE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          PVE
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/03/07/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD-----%E4%BA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title"> 逆向api通过外挂解锁特殊功能-----二</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Pve/">Pve</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/STM32/">STM32</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/openai/">openai</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pve/">pve</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVE/" rel="tag"> PVE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3588/" rel="tag">3588</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pve/" rel="tag">Pve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32/" rel="tag">STM32</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pve/" rel="tag">pve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vllm/" rel="tag">vllm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" rel="tag">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PVE/" style="font-size: 10px;"> PVE</a> <a href="/tags/3588/" style="font-size: 10px;">3588</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Pve/" style="font-size: 10px;">Pve</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/STM32/" style="font-size: 20px;">STM32</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">c语言</a> <a href="/tags/openai/" style="font-size: 10px;">openai</a> <a href="/tags/pve/" style="font-size: 15px;">pve</a> <a href="/tags/vllm/" style="font-size: 10px;">vllm</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 10px;">单片机</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/03/26/PVE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">PVE</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/07/Pve%E8%99%9A%E6%8B%9F%E9%93%AD%E5%87%A1nas%20os/">Pve虚拟铭凡nas os</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/07/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD-----%E4%BA%8C/"> 逆向api通过外挂解锁特殊功能-----二</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/20/pascal-vllm%E4%BF%AE%E5%A4%8D/">Pascal-vllm报错</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/08/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD/">逆向api通过外挂解锁特殊功能</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 leioukupo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

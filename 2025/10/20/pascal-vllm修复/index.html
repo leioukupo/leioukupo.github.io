@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Pascal-vllm报错 | leioukupo的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Pascal-vllm原版镜像报错aimv2被占用 通过挂载&#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.12&#x2F;dist-packages&#x2F;vllm&#x2F;transformers_utils&#x2F;configs&#x2F;ovis.py 进行修改 分别是 123431:    model_type: str &#x3D; &quot;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pascal-vllm报错">
+<meta property="og:url" content="https://blog.leioukupo.top/2025/10/20/pascal-vllm%E4%BF%AE%E5%A4%8D/index.html">
+<meta property="og:site_name" content="leioukupo的博客">
+<meta property="og:description" content="Pascal-vllm原版镜像报错aimv2被占用 通过挂载&#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.12&#x2F;dist-packages&#x2F;vllm&#x2F;transformers_utils&#x2F;configs&#x2F;ovis.py 进行修改 分别是 123431:    model_type: str &#x3D; &quot;a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-20T05:05:19.753Z">
+<meta property="article:modified_time" content="2025-10-20T05:48:21.080Z">
+<meta property="article:author" content="leioukupo">
+<meta property="article:tag" content="vllm">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="leioukupo的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">leioukupo的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">享受生活,致力学习</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.leioukupo.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-pascal-vllm修复" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/20/pascal-vllm%E4%BF%AE%E5%A4%8D/" class="article-date">
+  <time class="dt-published" datetime="2025-10-20T05:05:19.753Z" itemprop="datePublished">2025-10-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Pascal-vllm报错
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Pascal-vllm原版镜像报错aimv2被占用</p>
+<p>通过挂载&#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.12&#x2F;dist-packages&#x2F;vllm&#x2F;transformers_utils&#x2F;configs&#x2F;ovis.py</p>
+<p>进行修改</p>
+<p>分别是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">31</span>:    model_type: <span class="built_in">str</span> = <span class="string">&quot;aimv3&quot;</span></span><br><span class="line"><span class="number">76</span>:    AutoConfig.register(<span class="string">&quot;aimv3&quot;</span>, AIMv2Config)</span><br><span class="line"><span class="comment"># 原始是aimv2  修改成其他名字即可，两处名字要一样</span></span><br><span class="line"><span class="comment"># 最好指定一下--swap-space 0.5          太大也运行不了</span></span><br></pre></td></tr></table></figure>
+
+<p>参考的docker compose.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">networks:</span></span><br><span class="line">    <span class="attr">1panel-network:</span></span><br><span class="line">        <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">    <span class="attr">vllm:</span></span><br><span class="line">        <span class="attr">command:</span> <span class="string">--model</span> <span class="string">$&#123;MODEL&#125;</span></span><br><span class="line">        <span class="attr">container_name:</span> <span class="string">$&#123;CONTAINER_NAME&#125;</span></span><br><span class="line">        <span class="attr">deploy:</span></span><br><span class="line">            <span class="attr">resources:</span></span><br><span class="line">                <span class="attr">limits:</span></span><br><span class="line">                    <span class="attr">cpus:</span> <span class="string">$&#123;CPUS&#125;</span></span><br><span class="line">                    <span class="attr">memory:</span> <span class="string">$&#123;MEMORY_LIMIT&#125;</span></span><br><span class="line">                <span class="attr">reservations:</span></span><br><span class="line">                    <span class="attr">devices:</span></span><br><span class="line">                        <span class="bullet">-</span> <span class="attr">capabilities:</span></span><br><span class="line">                            <span class="bullet">-</span> <span class="string">gpu</span></span><br><span class="line">                          <span class="attr">count:</span> <span class="string">all</span></span><br><span class="line">                          <span class="attr">driver:</span> <span class="string">nvidia</span></span><br><span class="line">        <span class="attr">environment:</span></span><br><span class="line">            <span class="attr">HF_ENDPOINT:</span> <span class="string">https://hf-mirror.com</span></span><br><span class="line">            <span class="attr">HUGGING_FACE_HUB_TOKEN:</span> <span class="string">$&#123;HUGGING_FACE_HUB_TOKEN&#125;</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">ghcr.io/sasha0552/vllm:v0.9.1</span></span><br><span class="line">        <span class="attr">ipc:</span> <span class="string">host</span></span><br><span class="line">        <span class="attr">networks:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">1panel-network</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">$&#123;HOST_IP&#125;:$&#123;PANEL_APP_PORT_HTTP&#125;:8000</span></span><br><span class="line">        <span class="attr">restart:</span> <span class="string">on-failure:5</span></span><br><span class="line">        <span class="attr">runtime:</span> <span class="string">nvidia</span></span><br><span class="line">        <span class="attr">volumes:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">./cache/huggingface:/root/.cache/huggingface</span></span><br><span class="line">            <span class="bullet">-</span>  <span class="string">/path/to/ovis.py://usr/local/lib/python3.12/dist-packages/vllm/transformers_utils/configs/ovis.py</span></span><br></pre></td></tr></table></figure>
+
+<p>关于<code>An error occurred while downloading using </code>hf_transfer<code>. Consider disabling HF_HUB_ENABLE_HF_TRANSFER for better error handling.</code></p>
+<p>设置环境变量HF_HUB_ENABLE_HF_TRANSFER&#x3D;0即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.leioukupo.top/2025/10/20/pascal-vllm%E4%BF%AE%E5%A4%8D/" data-id="cuidLnQJSllBrssKMWy60bfSz" data-title="Pascal-vllm报错" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vllm/" rel="tag">vllm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/03/07/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD-----%E4%BA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+           逆向api通过外挂解锁特殊功能-----二
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/06/08/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">逆向api通过外挂解锁特殊功能</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Pve/">Pve</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/STM32/">STM32</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/openai/">openai</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pve/">pve</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVE/" rel="tag"> PVE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/3588/" rel="tag">3588</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pve/" rel="tag">Pve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/" rel="tag">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STM32/" rel="tag">STM32</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pve/" rel="tag">pve</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vllm/" rel="tag">vllm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" rel="tag">单片机</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PVE/" style="font-size: 10px;"> PVE</a> <a href="/tags/3588/" style="font-size: 10px;">3588</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Pve/" style="font-size: 10px;">Pve</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/STM32/" style="font-size: 20px;">STM32</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">c语言</a> <a href="/tags/openai/" style="font-size: 10px;">openai</a> <a href="/tags/pve/" style="font-size: 15px;">pve</a> <a href="/tags/vllm/" style="font-size: 10px;">vllm</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 10px;">单片机</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/03/26/PVE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">PVE</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/07/Pve%E8%99%9A%E6%8B%9F%E9%93%AD%E5%87%A1nas%20os/">Pve虚拟铭凡nas os</a>
+          </li>
+        
+          <li>
+            <a href="/2026/03/07/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD-----%E4%BA%8C/"> 逆向api通过外挂解锁特殊功能-----二</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/20/pascal-vllm%E4%BF%AE%E5%A4%8D/">Pascal-vllm报错</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/08/%E9%80%86%E5%90%91api%E9%80%9A%E8%BF%87%E5%A4%96%E6%8C%82%E8%A7%A3%E9%94%81%E7%89%B9%E6%AE%8A%E5%8A%9F%E8%83%BD/">逆向api通过外挂解锁特殊功能</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 leioukupo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
